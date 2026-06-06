@@ -804,7 +804,10 @@ async function chatSendMsg(){
   showTyping();
 
   try{
-    const res=await fetch('/api/chat',{
+    const apiUrl = window.location.hostname.includes('netlify') 
+  ? '/.netlify/functions/chat' 
+  : '/api/chat';
+const res=await fetch(apiUrl,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({messages:chatHistory})
